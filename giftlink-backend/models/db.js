@@ -17,10 +17,18 @@ async function connectToDatabase() {
 
     // Task 1: Connect to MongoDB
     // {{insert code}}
+    try{
+        await client.connect();
+        
+        // Task 2: Connect to database giftDB and store in variable dbInstance
+        //{{insert code}}
+        dbInstance=client.db('giftDB')
 
-    // Task 2: Connect to database giftDB and store in variable dbInstance
-    //{{insert code}}
-
+        return dbInstance;
+        res.send("successfully connected to the database")
+    }catch(error){
+        res.status(401).json({message:"conenction failed"})
+    }
     // Task 3: Return database instance
     // {{insert code}}
 }

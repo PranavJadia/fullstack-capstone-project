@@ -10,7 +10,7 @@ const dbName = "giftdb";
 
 async function connectToDatabase() {
     if (dbInstance){
-        return dbInstance
+        return dbInstance;
     };
 
     const client = new MongoClient(url);      
@@ -22,12 +22,12 @@ async function connectToDatabase() {
         
         // Task 2: Connect to database giftDB and store in variable dbInstance
         //{{insert code}}
-        dbInstance=client.db('giftDB')
+        dbInstance=client.db('giftDB');
 
         return dbInstance;
-        res.send("successfully connected to the database")
+        res.send("successfully connected to the database");
     }catch(error){
-        res.status(401).json({message:"conenction failed"})
+        res.status(401).json({message:"conenction failed"});
     }
     // Task 3: Return database instance
     // {{insert code}}

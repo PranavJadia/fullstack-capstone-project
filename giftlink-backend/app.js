@@ -24,7 +24,7 @@ app.use(express.json());
 // Route files
 // Gift API Task 1: import the giftRoutes and store in a constant called giftroutes
 //{{insert code here}}
-const giftRotues=require('./routes/giftRoutes')
+const giftRotues=require('./routes/giftRoutes');
 
 // Search API Task 1: import the searchRoutes and store in a constant called searchRoutes
 //{{insert code here}}
@@ -57,7 +57,7 @@ app.use((err, req, res, next) => {
 
 app.get("/",(req,res)=>{
     res.send("Inside the server")
-})
+});
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

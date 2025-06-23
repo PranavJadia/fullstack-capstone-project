@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
         if (existingEmail) {
             logger.error('Email id already exists');
             return res.status(400).json({ error: 'Email id already exists' });
-        }
+        };
 
         const salt = await bcryptjs.genSalt(10);
         const hash = await bcryptjs.hash(req.body.password, salt);
@@ -51,11 +51,11 @@ router.post('/register', async (req, res) => {
     } catch (e) {
         logger.error(e);
         return res.status(500).send('Internal server error');
-    }
+    };
 });
 
 router.post('/login', async (req, res) => {
-    console.log("\n\n Inside login")
+    console.log("\n\n Inside login");
 
     try {
         // const collection = await connectToDatabase();
@@ -64,11 +64,11 @@ router.post('/login', async (req, res) => {
         const theUser = await collection.findOne({ email: req.body.email });
 
         if (theUser) {
-            let result = await bcryptjs.compare(req.body.password, theUser.password)
+            let result = await bcryptjs.compare(req.body.password, theUser.password);
             if(!result) {
                 logger.error('Passwords do not match');
                 return res.status(404).json({ error: 'Wrong pasword' });
-            }
+            };
             let payload = {
                 user: {
                     id: theUser._id.toString(),
@@ -84,11 +84,11 @@ router.post('/login', async (req, res) => {
         } else {
             logger.error('User not found');
             return res.status(404).json({ error: 'User not found' });
-        }
+        };
     } catch (e) {
         logger.error(e);
         return res.status(500).json({ error: 'Internal server error', details: e.message });
-      }
+      };
 });
 
 // update API
@@ -101,7 +101,7 @@ router.put('/update', async (req, res) => {
     if (!errors.isEmpty()) {
         logger.error('Validation errors in update request', errors.array());
         return res.status(400).json({ errors: errors.array() });
-    }
+    };
 
     try {
         const email = req.headers.email;
@@ -109,7 +109,7 @@ router.put('/update', async (req, res) => {
         if (!email) {
             logger.error('Email not found in the request headers');
             return res.status(400).json({ error: "Email not found in the request headers" });
-        }
+        };
 
         //Task 4: Connect to MongoDB
         const db = await connectToDatabase();
@@ -121,7 +121,7 @@ router.put('/update', async (req, res) => {
         if (!existingUser) {
             logger.error('User not found');
             return res.status(404).json({ error: "User not found" });
-        }
+        };
 
         existingUser.firstName = req.body.name;
         existingUser.updatedAt = new Date();
